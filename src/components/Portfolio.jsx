@@ -19,6 +19,9 @@ const Header = () => (
 const About = () => (
   <section className="py-32 bg-gray-100">
     <div className="container mx-auto px-8">
+      <div className="flex justify-center mb-8">
+        <img src="/me2.jpg" alt="Foto Saya" className="rounded-sm w-24 h-24" />
+      </div>
       <h2 className="text-3xl font-bold mb-4">About Me</h2>
       <p className="text-lg">
         Hi, my name is Raka Santang Rabbani, a 20 years old Web Developer. 
@@ -77,7 +80,7 @@ const Projects = () => {
   return (
     <section className="py-10 bg-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4">Proyek</h2>
+        <h2 className="text-3xl font-bold mb-4">My Projects</h2>
         {projects.map((project, index) => (
           <ProjectCard key={index} title={project.title} description={project.description} />
         ))}
