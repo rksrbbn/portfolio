@@ -1,6 +1,10 @@
-import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaGithub, FaEnvelope } from 'react-icons/fa';
 import SkillsAndBudget from './SkillsAndBudget';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // Pastikan ini sesuai dengan root element di aplikasi Anda
+
 
 const Header = () => (
     <div className="mb-8 py-64">
@@ -35,54 +39,71 @@ const About = () => (
   </section>
 );
 
-const Skills = () => {
-  const skills = ['Laravel', 'Node.js', 'Express', 'MySQL', 'Tailwind CSS', 'JavaScript', 'Python', 'Git', 'PostgreSQL'];
-  
+const ProjectCard = ({ title, description, img }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <section className="py-10">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4">Kemampuan</h2>
-        <div className="flex flex-wrap gap-2">
-          {skills.map((skill, index) => (
-            <span key={index} className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-              {skill}
-            </span>
-          ))}
+    <div className="bg-white shadow-md rounded-lg p-6 mb-4">
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p>{description}</p>
+      <center>
+        <img src={img} alt="" className="rounded-sm w-80 h-80" onClick={openModal} />
+      </center>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Image Modal"
+        className="flex items-center justify-center"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center"
+      >
+        <div className="bg-white p-4 rounded-lg">
+          <button
+            onClick={closeModal}
+            className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2"
+          >
+            Close
+          </button>
+          <img src={img} alt="" className="rounded-sm max-w-full max-h-screen" />
         </div>
-      </div>
-    </section>
+      </Modal>
+    </div>
   );
 };
-
-const ProjectCard = ({ title, description }) => (
-  <div className="bg-white shadow-md rounded-lg p-6 mb-4">
-    <h3 className="text-xl font-bold mb-2">{title}</h3>
-    <p>{description}</p>
-  </div>
-);
 
 const Projects = () => {
   const projects = [
     {
-      title: "E-commerce Platform",
-      description: "Developed a full-stack e-commerce platform using MERN stack with features like product management, shopping cart, and payment integration."
+      title: "Sistem Pembayaran Sekolah",
+      description: "Developed an REST API Service for SPS web application using MERN (MySQL, Express JS, React, Node.js) stack.",
+      img: "/sps.png"
     },
     {
-      title: "Task Management App",
-      description: "Built a real-time task management application using React and Firebase, allowing teams to collaborate efficiently."
+      title: "Antrian Online",
+      description: "Developed online queuing system using CodeIgniter and Tailwind CSS",
+      img: "/2.png"
     },
     {
-      title: "Personal Finance Tracker",
-      description: "Created a mobile-responsive web app for personal finance tracking using Vue.js and Chart.js for data visualization."
+      title: "JKT48 Lineup Creator",
+      description: "Developed a fullstack JKT48 lineup creator; a JKT48 fan-made web application using React JS.",
+      img: "/3.png"
     }
   ];
 
   return (
     <section className="py-10 bg-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4">My Projects</h2>
+        <h2 className="text-3xl font-bold mb-8">My Projects</h2>
         {projects.map((project, index) => (
-          <ProjectCard key={index} title={project.title} description={project.description} />
+          <ProjectCard key={index} title={project.title} description={project.description} img={project.img} />
         ))}
       </div>
     </section>
