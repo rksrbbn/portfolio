@@ -84,7 +84,7 @@ const Projects = () => {
     {
       title: "Sistem Pembayaran Sekolah",
       description: "Developed an REST API Service for SPS web application using MERN (MySQL, Express JS, React, Node.js) stack.",
-      img: "/sps.png"
+      img: "/1.png"
     },
     {
       title: "Antrian Online",
